@@ -7,11 +7,13 @@ import (
 )
 
 func formHandler(w http.ResponseWriter, r *http.Request) {
+	// Formを使うには事前にParseFormを実行する
 	if err := r.ParseForm(); err != nil {
 		fmt.Fprintf(w, "ParseForm() err: %v", err)
 		return
 	}
 	fmt.Fprintf(w, "POST request successful")
+	// キーを指定してフォームデータを取得
 	name := r.FormValue("name")
 	address := r.FormValue("address")
 	fmt.Fprintf(w, "Name = %s\n", name)
@@ -19,7 +21,6 @@ func formHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func helloHandler(w http.ResponseWriter, r *http.Request) {
-	// r.URL.Pathはリクエストのパスを返す
 	if r.URL.Path != "/hello" {
 		http.Error(w, "404 not found", http.StatusNotFound)
 		return
