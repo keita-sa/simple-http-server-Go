@@ -16,6 +16,8 @@ func formHandler(w http.ResponseWriter, r *http.Request) {
 	// キーを指定してフォームデータを取得
 	name := r.FormValue("name")
 	address := r.FormValue("address")
+
+	// %sは文字列の表示
 	fmt.Fprintf(w, "Name = %s\n", name)
 	fmt.Fprintf(w, "Address = %s\n", address)
 }
