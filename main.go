@@ -7,18 +7,16 @@ import (
 )
 
 func formHandler(w http.ResponseWriter, r *http.Request) {
-	// Formを使うには事前にParseFormを実行する
-	if err := r.ParseForm(); err != nil {
+	if err := r.ParseForm(); err != nil { // Formを使うには事前にParseFormを実行する
 		fmt.Fprintf(w, "ParseForm() err: %v", err)
 		return
 	}
 	fmt.Fprintf(w, "POST request successful")
-	// キーを指定してフォームデータを取得
-	name := r.FormValue("name")
+
+	name := r.FormValue("name") // キーを指定してフォームデータを取得
 	address := r.FormValue("address")
 
-	// %sは文字列の表示
-	fmt.Fprintf(w, "Name = %s\n", name)
+	fmt.Fprintf(w, "Name = %s\n", name) // %sは文字列の表示
 	fmt.Fprintf(w, "Address = %s\n", address)
 }
 
@@ -35,8 +33,7 @@ func helloHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
-	// staticというディレクトリにあるファイルがサーブされる
-	fileServer := http.FileServer(http.Dir("./static"))
+	fileServer := http.FileServer(http.Dir("./static")) // staticというディレクトリにあるファイルがサーブされる
 	http.Handle("/", fileServer)
 	http.HandleFunc("/form", formHandler)
 	http.HandleFunc("/hello", helloHandler)
